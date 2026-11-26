@@ -1,0 +1,27 @@
+-- Sensor 1: fila (ultrassonico)
+[ OK ] 400 cm -> CURTA
+[ OK ] 250,1 cm -> CURTA (logo acima do limiar)
+[ OK ] 250 cm -> MEDIA (limiar)
+[ OK ] 120,1 cm -> MEDIA
+[ OK ] 120 cm -> LONGA (limiar)
+[ OK ] 0 cm (sem eco) -> SEM_LEITURA, nunca LOTADO
+[ OK ] 500 cm (fora do alcance) -> SEM_LEITURA
+-- Estimativa de pessoas (60 cm por pessoa, area de 400 cm)
+[ OK ] 400 cm -> 0 pessoas
+[ OK ] 403,5 cm -> 0 pessoas (leitura do Wokwi no maximo)
+[ OK ] 200 cm -> 3 pessoas
+[ OK ] 80 cm -> 5 pessoas
+[ OK ] 21 cm -> 6 pessoas
+[ OK ] sem eco -> 0 (status SEM_LEITURA avisa)
+-- Sensor 2: movimento (PIR)
+[ OK ] 29,9 s sem movimento -> ainda FLUXO
+[ OK ] 30 s sem movimento -> SEM_FLUXO
+[ OK ] rotulo SEM_FLUXO
+-- Decisao combinada
+[ OK ] fila curta -> OK (PIR nao importa)
+[ OK ] fila media andando -> ALERTA
+[ OK ] fila media parada -> LOTADO (vies pro-seguranca)
+[ OK ] fila longa -> LOTADO
+[ OK ] sem leitura -> SEM_LEITURA
+
+TODOS OS TESTES PASSARAM (0 falha(s))

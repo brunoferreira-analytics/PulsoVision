@@ -1,0 +1,55 @@
+$ python gerar_segredos.py      (segredos gravados fora do Git, permissão 600)
+$ python executar.py --https
+ * Serving Flask app 'main'
+ * Debug mode: off
+
+$ python totem_simulado.py --segredo <segredo do totem>     (leitura assinada, HTTPS)
+201 {
+  "data_hora": "2026-11-17 10:28:34",
+  "versao_contrato": "1.0",
+  "id_leitura": 4922114,
+  "id_totem": "TOTEM-4048296-01",
+  "cnes": "4048296",
+  "nome_unidade": "UBS Jardim Paulista",
+  "tipo_unidade": "UBS",
+  "cod_municipio": "351880",
+  "fila_distancia_cm": 42.5,
+  "fila_status": "LONGA",
+  "movimento": true,
+  "movimento_status": "FLUXO",
+  "pessoas_aguardando": 6,
+  "status": "LOTADO",
+  "motivo": "FILA_LONGA",
+  "status_api": "LOTADO",
+  "motivo_api": "FILA_LONGA",
+  "confere_totem": true,
+  "status_final": "LOTADO",
+
+$ curl -X POST https://127.0.0.1:5443/leituras -d <leitura sem assinatura>
+{"erro":"Totem não autenticado."}
+
+
+$ curl https://127.0.0.1:5443/leituras      (sem token)
+{"erro":"Credencial ausente ou inválida."}
+
+
+$ curl -H "Authorization: Bearer <token do gestor>" https://127.0.0.1:5443/leituras?limite=1
+quantidade: 1 | status_final: LOTADO
+
+$ curl http://127.0.0.1:5443/indicadores      (sem TLS)
+-> curl saiu com código 56 : o servidor só aceita HTTPS
+
+$ curl -I https://127.0.0.1:5443/indicadores
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.13.18
+Content-Type: application/json
+Content-Length: 638
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Content-Security-Policy: default-src 'none'; frame-ancestors 'none'
+Referrer-Policy: no-referrer
+Cache-Control: no-store
+Permissions-Policy: geolocation=(), camera=(), microphone=()
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Connection: close
+

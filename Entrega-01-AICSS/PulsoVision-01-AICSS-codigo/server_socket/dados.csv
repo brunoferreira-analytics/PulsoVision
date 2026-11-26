@@ -1,0 +1,6 @@
+data_hora,versao_contrato,id_leitura,id_totem,cnes,nome_unidade,tipo_unidade,cod_municipio,fila_distancia_cm,fila_status,movimento,movimento_status,pessoas_aguardando,status,motivo
+2026-11-12 11:50:57,1.0,1,SIMULADOR-01,4048296,UBS Jardim Paulista,UBS,351880,400.0,CURTA,true,FLUXO,0,OK,FILA_CURTA
+2026-11-12 11:50:57,1.0,2,SIMULADOR-01,4048296,UBS Jardim Paulista,UBS,351880,200.0,MEDIA,true,FLUXO,3,ALERTA,FILA_MEDIA
+2026-11-12 11:50:58,1.0,3,SIMULADOR-01,4048296,UBS Jardim Paulista,UBS,351880,200.0,MEDIA,false,SEM_FLUXO,3,LOTADO,FILA_PARADA
+2026-11-12 11:50:58,1.0,4,SIMULADOR-01,4048296,UBS Jardim Paulista,UBS,351880,80.0,LONGA,true,FLUXO,5,LOTADO,FILA_LONGA
+2026-11-12 11:51:00,1.0,100,SIMULADOR-01,4048296,UBS Jardim Paulista,UBS,351880,400.0,CURTA,true,FLUXO,0,OK,FILA_CURTA

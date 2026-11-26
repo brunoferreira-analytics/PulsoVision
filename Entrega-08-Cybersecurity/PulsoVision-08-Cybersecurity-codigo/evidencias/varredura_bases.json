@@ -1,0 +1,53 @@
+[
+  {
+    "arquivo": "tbEstabelecimento202609_1.csv",
+    "achados": {
+      "cpf": 776078,
+      "email": 370664,
+      "telefone": 112323,
+      "chave_aws": 0,
+      "segredo_aws": 0,
+      "chave_privada": 0
+    },
+    "total": 1259065,
+    "linhas": 640122,
+    "colunas_sensiveis": {
+      "NU_TELEFONE": 496929,
+      "NU_FAX": 1,
+      "NO_EMAIL": 367965,
+      "NU_CPF": 171062,
+      "CO_USUARIO": 640122,
+      "CO_CPFDIRETORCLN": 597244,
+      "REG_DIRETORCLN": 384199,
+      "NO_USUARIO_GEO": 494950
+    }
+  },
+  {
+    "arquivo": "base_municipios_ml.csv",
+    "achados": {
+      "cpf": 0,
+      "email": 0,
+      "telefone": 0,
+      "chave_aws": 0,
+      "segredo_aws": 0,
+      "chave_privada": 0
+    },
+    "total": 0,
+    "linhas": 5571,
+    "colunas_sensiveis": {}
+  },
+  {
+    "arquivo": "base_municipios.csv",
+    "achados": {
+      "cpf": 0,
+      "email": 0,
+      "telefone": 0,
+      "chave_aws": 0,
+      "segredo_aws": 0,
+      "chave_privada": 0
+    },
+    "total": 0,
+    "linhas": 5571,
+    "colunas_sensiveis": {}
+  }
+]

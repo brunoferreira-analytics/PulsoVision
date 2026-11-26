@@ -1,0 +1,16 @@
+# PulsoVision · Totem de Lotação
+# Disciplina 01: AI Computer Systems & Sensors (AICSS) · Global Solution 2026.2 — FIAP
+#
+# Arquivo: 01-aicss-totem/wokwi.toml
+# Resumo:  Liga o firmware compilado pelo PlatformIO ao simulador Wokwi, que monta o
+#          circuito descrito em diagram.json.
+#
+# Integrantes:
+#   - Tiago Thomaz Cesaro
+#   - Bruno Henrique Ferreira Ambrosio
+#   - Lucas Maximo dos Santos
+
+[wokwi]
+version = 1
+elf = ".pio/build/esp32/firmware.elf"
+firmware = ".pio/build/esp32/firmware.bin"

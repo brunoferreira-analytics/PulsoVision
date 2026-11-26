@@ -1,0 +1,6 @@
+2026-11-12 11:50:58 | origem=127.0.0.1:33729 | JSON inválido (Expecting ',' delimiter) | {"status": "OK"
+2026-11-12 11:50:59 | origem=127.0.0.1:33730 | a mensagem não é um objeto JSON {...} | [1, 2, 3]
+2026-11-12 11:50:59 | origem=127.0.0.1:33731 | campo ausente: versao_contrato; campo ausente: id_leitura; campo ausente: id_totem; campo ausente: nome_unidade; campo ausente: tipo_unidade; campo ausente: cod_municipio; campo ausente: fila_distancia_cm; campo ausente: fila_status; campo ausente: movimento; campo ausente: movimento_status; campo ausente: pessoas_aguardando; campo ausente: motivo | {"cnes": "4048296", "status": "OK"}
+2026-11-12 11:50:59 | origem=127.0.0.1:33732 | valor não permitido em status: 'TUDO_CERTO' | {"versao_contrato": "1.0", "id_totem": "SIMULADOR-01", "cnes": "4048296", "nome_unidade": "UBS Jardim Paulista", "tipo_unidade": "UBS", "cod_municipio": "351880", "fila_distancia_cm": 400.0, "fila_sta
+2026-11-12 11:50:59 | origem=127.0.0.1:33733 | campo fora do contrato: comando | {"versao_contrato": "1.0", "id_totem": "SIMULADOR-01", "cnes": "4048296", "nome_unidade": "UBS Jardim Paulista", "tipo_unidade": "UBS", "cod_municipio": "351880", "fila_distancia_cm": 400.0, "fila_sta
+2026-11-12 11:51:00 | origem=127.0.0.1:33734 | mensagem maior que 4096 bytes | 

@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "author": "PulsoVision · FIAP GS 2026.2",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-v1",
+      "id": "esp",
+      "top": -79.52,
+      "left": -33.6,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": 77.3,
+      "left": 141.3,
+      "rotate": 180,
+      "attrs": {
+        "distance": "400"
+      }
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": -274.4,
+      "left": -189.78,
+      "attrs": {
+        "delayTime": "5"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -42,
+      "left": -303.4,
+      "attrs": {
+        "color": "limegreen"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 44.4,
+      "left": -341.8,
+      "attrs": {
+        "color": "yellow"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": 111.6,
+      "left": -341.8,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 3.95,
+      "left": -124.8,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 80.75,
+      "left": -259.2,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 147.95,
+      "left": -249.6,
+      "attrs": {
+        "value": "220"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:VIN",
+      "ultrasonic1:VCC",
+      "red",
+      [
+        "v9.6",
+        "h-19.2",
+        "v96",
+        "h384",
+        "v-105.6"
+      ]
+    ],
+    [
+      "ultrasonic1:GND",
+      "esp:GND.1",
+      "black",
+      [
+        "v-9.6",
+        "h-142.31"
+      ]
+    ],
+    [
+      "esp:D5",
+      "ultrasonic1:TRIG",
+      "green",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "esp:D18",
+      "ultrasonic1:ECHO",
+      "cyan",
+      [
+        "h153.11",
+        "v76.8"
+      ]
+    ],
+    [
+      "pir1:VCC",
+      "esp:VIN",
+      "gray",
+      [
+        "v259.2",
+        "h124.8"
+      ]
+    ],
+    [
+      "esp:GND.2",
+      "pir1:GND",
+      "black",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "esp:D19",
+      "pir1:OUT",
+      "white",
+      [
+        "h28.31",
+        "v-76.8",
+        "h-239.86"
+      ]
+    ],
+    [
+      "esp:D25",
+      "r1:2",
+      "green",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "led1:A",
+      "r1:1",
+      "orange",
+      [
+        "v28.8"
+      ]
+    ],
+    [
+      "led1:C",
+      "esp:GND.2",
+      "magenta",
+      [
+        "v57.6",
+        "h182.8"
+      ]
+    ],
+    [
+      "esp:D26",
+      "r2:2",
+      "green",
+      [
+        "h-171.6"
+      ]
+    ],
+    [
+      "led2:A",
+      "r2:1",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:GND.2",
+      "led2:C",
+      "black",
+      [
+        "v9.6",
+        "h-28.8",
+        "v28.8",
+        "h-269.2"
+      ]
+    ],
+    [
+      "r3:2",
+      "esp:D27",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "led3:A",
+      "r3:1",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "led3:C",
+      "esp:GND.2",
+      "gray",
+      [
+        "v38.4",
+        "h230.8",
+        "v-124.8"
+      ]
+    ]
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,8 @@
+2026-11-11 23:14:56 | origem=127.0.0.1:56209 | erro inesperado: ConnectionResetError: [WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto | 
+2026-11-11 23:22:39 | origem=127.0.0.1:56382 | erro inesperado: ConnectionResetError: [WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto | 
+2026-11-11 23:44:33 | origem=127.0.0.1:56853 | JSON inválido (Expecting ',' delimiter) | {"status": "OK"
+2026-11-11 23:44:33 | origem=127.0.0.1:56854 | a mensagem não é um objeto JSON {...} | [1, 2, 3]
+2026-11-11 23:44:33 | origem=127.0.0.1:56855 | campo ausente: versao_contrato; campo ausente: id_leitura; campo ausente: id_totem; campo ausente: nome_unidade; campo ausente: tipo_unidade; campo ausente: cod_municipio; campo ausente: fila_distancia_cm; campo ausente: fila_status; campo ausente: movimento; campo ausente: movimento_status; campo ausente: pessoas_aguardando; campo ausente: motivo | {"cnes": "4048296", "status": "OK"}
+2026-11-11 23:44:34 | origem=127.0.0.1:56860 | valor não permitido em status: 'TUDO_CERTO' | {"versao_contrato": "1.0", "id_totem": "SIMULADOR-01", "cnes": "4048296", "nome_unidade": "UBS Jardim Paulista", "tipo_unidade": "UBS", "cod_municipio": "351880", "fila_distancia_cm": 400.0, "fila_sta
+2026-11-11 23:44:34 | origem=127.0.0.1:56876 | campo fora do contrato: comando | {"versao_contrato": "1.0", "id_totem": "SIMULADOR-01", "cnes": "4048296", "nome_unidade": "UBS Jardim Paulista", "tipo_unidade": "UBS", "cod_municipio": "351880", "fila_distancia_cm": 400.0, "fila_sta
+2026-11-11 23:44:34 | origem=127.0.0.1:56877 | mensagem maior que 4096 bytes | 

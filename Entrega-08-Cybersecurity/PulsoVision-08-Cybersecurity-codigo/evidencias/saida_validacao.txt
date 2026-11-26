@@ -1,0 +1,99 @@
+====================================================================================================
+A. API e comunicação do totem
+====================================================================================================
+[MITIGADO] A01 Leitura legítima e assinada do totem
+            antes:  HTTP 201, gravada
+            depois: HTTP 201, gravada
+[MITIGADO] A02 Atacante envia LOTADO falso sem credencial
+            antes:  HTTP 201, gravada (1 linha nova)
+            depois: HTTP 401, nada gravado (0 linha nova)
+[MITIGADO] A03 Assinatura feita com segredo errado
+            antes:  HTTP 201 (não há verificação)
+            depois: HTTP 401
+[MITIGADO] A04 Reenvio (replay) de uma leitura legítima capturada
+            antes:  HTTP 201 e 201: leitura duplicada
+            depois: HTTP 201 e 409: segunda recusada
+[MITIGADO] A05 Leitura capturada há 10 minutos reenviada
+            antes:  aceita (não há horário)
+            depois: HTTP 401
+[MITIGADO] A06 Corpo alterado no caminho (40 pessoas em vez de 1)
+            antes:  HTTP 201, valor alterado gravado
+            depois: HTTP 401, alteração detectada
+[MITIGADO] A07 Totem da UBS Jardim Paulista tenta informar a UBS Continental
+            antes:  HTTP 201, gravada
+            depois: HTTP 403
+[MITIGADO] A08 Fórmula de planilha no nome da unidade (CSV injection)
+            antes:  fórmula gravada no CSV
+            depois: nome trocado pelo cadastro CNES; fórmula não gravada
+[MITIGADO] A09 100 requisições seguidas do mesmo IP (flood)
+            antes:  100 gravadas, 0 bloqueadas
+            depois: 0 gravadas, 40 barradas pelo limite (429) após 60
+[MITIGADO] A10 Totem comprometido envia 25 leituras válidas em 1 minuto
+            antes:  todas aceitas
+            depois: 16 aceitas, 9 barradas
+[MITIGADO] A11 Consulta do histórico detalhado sem login
+            antes:  HTTP 200, 50 leituras expostas
+            depois: HTTP 401 sem token; HTTP 200 com token de gestor
+[MITIGADO] A12 Gestor tenta ler o log de auditoria (privilégio mínimo)
+            antes:  HTTP 404: não existe log
+            depois: gestor HTTP 403; auditor HTTP 200
+[MITIGADO] A13 Indicadores públicos continuam abertos para o app do cidadão
+            antes:  HTTP 200
+            depois: HTTP 200, ranking com 1 unidade(s)
+[MITIGADO] A14 Corpo de 1 MB para esgotar memória
+            antes:  HTTP 413 (limite de 4 KB da API 02)
+            depois: HTTP 413 (limite mantido)
+[MITIGADO] A15 Cabeçalhos de segurança HTTP
+            antes:  0 de 6
+            depois: 6 de 6
+[MITIGADO] A16 Log de auditoria e detecção de adulteração
+            antes:  nenhum registro de eventos
+            depois: 136 eventos; cadeia íntegra = True; após editar 1 linha: íntegra = False (linha 5)
+[MITIGADO] A17 IP do usuário no log (dado pessoal)
+            antes:  sem log
+            depois: IP guardado só como pseudônimo HMAC
+====================================================================================================
+B. Transporte: HTTP × HTTPS
+====================================================================================================
+[MITIGADO] B01 Alguém na mesma rede captura a leitura no caminho
+            antes:  HTTP 201; JSON da lotação visível em texto puro (538 bytes)
+            depois: HTTP 201; só bytes cifrados (TLSv1.3, TLS_AES_256_GCM_SHA384); conexão HTTP sem TLS recusada
+====================================================================================================
+C. Privacidade das bases e segredos
+====================================================================================================
+  varrendo a base bruta do CNES (cerca de 40 s)...
+[MITIGADO] C01 Dado pessoal da base bruta do CNES chegando ao projeto
+            antes:  640.122 linhas; CPF válidos: 776.078; e-mails: 370.664; telefones: 112.323; 8 colunas pessoais
+            depois: bases usadas pelos modelos: base_municipios_ml.csv = 0 achados; base_municipios.csv = 0 achados (varredura feita agora)
+[MITIGADO] C02 Chaves de nuvem (AWS) ou chave privada esquecidas no repositório
+            antes:  sem verificação antes do commit
+            depois: varredura do repositório: 0 arquivo(s) com credencial
+====================================================================================================
+D. Componentes de IA
+====================================================================================================
+[MITIGADO] D01 Relato com CPF, telefone e ordem para a IA baixar a cor
+            antes:  texto inteiro iria ao modelo (CPF, telefone e a ordem junto)
+            depois: removidos {'cpf': 1, 'telefone': 1}; manipulação detectada = True; relato vai delimitado como dado
+[MITIGADO] D02 Modelo (ou texto manipulado) tenta baixar VERMELHO para VERDE
+            antes:  regra já existia no desenho da triagem (RN, seção 8.2)
+            depois: cor final = VERMELHO
+[MITIGADO] D03 Foto do celular com localização GPS no EXIF
+            antes:  GPS presente na foto enviada = True (endereço da pessoa)
+            depois: foto aceita = True; GPS na cópia que vai à CNN = False
+[MITIGADO] D04 Fotos sem qualidade ou arquivo falso
+            antes:  a CNN pontuaria qualquer arquivo que abrisse
+            depois: escura: foto escura demais; procure um lugar iluminado; borrada: foto borrada; segure firme e foque na lesão; pequena: resolução baixa (120×120); aproxime a câmera; não é imagem: arquivo não é uma imagem válida
+[MITIGADO] D05 Bomba de descompressão: PNG de 7 KB com 64 milhões de pixels
+            antes:  Pillow padrão abre (8000×8000)
+            depois: imagem grande demais (possível bomba de descompressão)
+[MITIGADO] D06 Resposta gerada com diagnóstico ou falsa tranquilização
+            antes:  exibida ao cidadão como veio
+            depois: 2 de 2 inadequadas bloqueadas; a adequada passou = True
+[MITIGADO] D07 Pontuação da CNN perto do corte (0,36 com corte 0,335)
+            antes:  decisão automática
+            depois: revisão humana = True (pontuação 0.360 perto do corte 0.335); pontuação 0,91 = False
+[MITIGADO] D08 Arquivo do modelo trocado por um pickle malicioso
+            antes:  joblib.load executou código do atacante = True
+            depois: modelo legítimo carregou (Regressão Logística ajustada); adulterado bloqueado = True; código executado = False
+====================================================================================================
+28 de 28 verificações passaram. Evidências em evidencias/

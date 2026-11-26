@@ -1,0 +1,245 @@
+{
+  "gerado_em": "2026-11-17 10:28:21",
+  "resultados": [
+    {
+      "id": "A01",
+      "teste": "Leitura legítima e assinada do totem",
+      "risco": "funcionalidade",
+      "antes": "HTTP 201, gravada",
+      "depois": "HTTP 201, gravada",
+      "mitigado": true
+    },
+    {
+      "id": "A02",
+      "teste": "Atacante envia LOTADO falso sem credencial",
+      "risco": "R01",
+      "antes": "HTTP 201, gravada (1 linha nova)",
+      "depois": "HTTP 401, nada gravado (0 linha nova)",
+      "mitigado": true
+    },
+    {
+      "id": "A03",
+      "teste": "Assinatura feita com segredo errado",
+      "risco": "R01",
+      "antes": "HTTP 201 (não há verificação)",
+      "depois": "HTTP 401",
+      "mitigado": true
+    },
+    {
+      "id": "A04",
+      "teste": "Reenvio (replay) de uma leitura legítima capturada",
+      "risco": "R03",
+      "antes": "HTTP 201 e 201: leitura duplicada",
+      "depois": "HTTP 201 e 409: segunda recusada",
+      "mitigado": true
+    },
+    {
+      "id": "A05",
+      "teste": "Leitura capturada há 10 minutos reenviada",
+      "risco": "R03",
+      "antes": "aceita (não há horário)",
+      "depois": "HTTP 401",
+      "mitigado": true
+    },
+    {
+      "id": "A06",
+      "teste": "Corpo alterado no caminho (40 pessoas em vez de 1)",
+      "risco": "R02",
+      "antes": "HTTP 201, valor alterado gravado",
+      "depois": "HTTP 401, alteração detectada",
+      "mitigado": true
+    },
+    {
+      "id": "A07",
+      "teste": "Totem da UBS Jardim Paulista tenta informar a UBS Continental",
+      "risco": "R01",
+      "antes": "HTTP 201, gravada",
+      "depois": "HTTP 403",
+      "mitigado": true
+    },
+    {
+      "id": "A08",
+      "teste": "Fórmula de planilha no nome da unidade (CSV injection)",
+      "risco": "R08",
+      "antes": "fórmula gravada no CSV",
+      "depois": "nome trocado pelo cadastro CNES; fórmula não gravada",
+      "mitigado": true
+    },
+    {
+      "id": "A09",
+      "teste": "100 requisições seguidas do mesmo IP (flood)",
+      "risco": "R06",
+      "antes": "100 gravadas, 0 bloqueadas",
+      "depois": "0 gravadas, 40 barradas pelo limite (429) após 60",
+      "mitigado": true
+    },
+    {
+      "id": "A10",
+      "teste": "Totem comprometido envia 25 leituras válidas em 1 minuto",
+      "risco": "R06",
+      "antes": "todas aceitas",
+      "depois": "16 aceitas, 9 barradas",
+      "mitigado": true
+    },
+    {
+      "id": "A11",
+      "teste": "Consulta do histórico detalhado sem login",
+      "risco": "R07",
+      "antes": "HTTP 200, 50 leituras expostas",
+      "depois": "HTTP 401 sem token; HTTP 200 com token de gestor",
+      "mitigado": true
+    },
+    {
+      "id": "A12",
+      "teste": "Gestor tenta ler o log de auditoria (privilégio mínimo)",
+      "risco": "R07",
+      "antes": "HTTP 404: não existe log",
+      "depois": "gestor HTTP 403; auditor HTTP 200",
+      "mitigado": true
+    },
+    {
+      "id": "A13",
+      "teste": "Indicadores públicos continuam abertos para o app do cidadão",
+      "risco": "funcionalidade",
+      "antes": "HTTP 200",
+      "depois": "HTTP 200, ranking com 1 unidade(s)",
+      "mitigado": true
+    },
+    {
+      "id": "A14",
+      "teste": "Corpo de 1 MB para esgotar memória",
+      "risco": "R06",
+      "antes": "HTTP 413 (limite de 4 KB da API 02)",
+      "depois": "HTTP 413 (limite mantido)",
+      "mitigado": true
+    },
+    {
+      "id": "A15",
+      "teste": "Cabeçalhos de segurança HTTP",
+      "risco": "R07",
+      "antes": "0 de 6",
+      "depois": "6 de 6",
+      "mitigado": true
+    },
+    {
+      "id": "A16",
+      "teste": "Log de auditoria e detecção de adulteração",
+      "risco": "R14",
+      "antes": "nenhum registro de eventos",
+      "depois": "136 eventos; cadeia íntegra = True; após editar 1 linha: íntegra = False (linha 5)",
+      "mitigado": true
+    },
+    {
+      "id": "A17",
+      "teste": "IP do usuário no log (dado pessoal)",
+      "risco": "R09",
+      "antes": "sem log",
+      "depois": "IP guardado só como pseudônimo HMAC",
+      "mitigado": true
+    },
+    {
+      "id": "B01",
+      "teste": "Alguém na mesma rede captura a leitura no caminho",
+      "risco": "R02",
+      "antes": "HTTP 201; JSON da lotação visível em texto puro (538 bytes)",
+      "depois": "HTTP 201; só bytes cifrados (TLSv1.3, TLS_AES_256_GCM_SHA384); conexão HTTP sem TLS recusada",
+      "mitigado": true
+    },
+    {
+      "id": "C01",
+      "teste": "Dado pessoal da base bruta do CNES chegando ao projeto",
+      "risco": "R04",
+      "antes": "640.122 linhas; CPF válidos: 776.078; e-mails: 370.664; telefones: 112.323; 8 colunas pessoais",
+      "depois": "bases usadas pelos modelos: base_municipios_ml.csv = 0 achados; base_municipios.csv = 0 achados (varredura feita agora)",
+      "mitigado": true
+    },
+    {
+      "id": "C02",
+      "teste": "Chaves de nuvem (AWS) ou chave privada esquecidas no repositório",
+      "risco": "R05",
+      "antes": "sem verificação antes do commit",
+      "depois": "varredura do repositório: 0 arquivo(s) com credencial",
+      "mitigado": true
+    },
+    {
+      "id": "D01",
+      "teste": "Relato com CPF, telefone e ordem para a IA baixar a cor",
+      "risco": "R09/R10",
+      "antes": "texto inteiro iria ao modelo (CPF, telefone e a ordem junto)",
+      "depois": "removidos {'cpf': 1, 'telefone': 1}; manipulação detectada = True; relato vai delimitado como dado",
+      "mitigado": true
+    },
+    {
+      "id": "D02",
+      "teste": "Modelo (ou texto manipulado) tenta baixar VERMELHO para VERDE",
+      "risco": "R10",
+      "antes": "regra já existia no desenho da triagem (RN, seção 8.2)",
+      "depois": "cor final = VERMELHO",
+      "mitigado": true
+    },
+    {
+      "id": "D03",
+      "teste": "Foto do celular com localização GPS no EXIF",
+      "risco": "R09",
+      "antes": "GPS presente na foto enviada = True (endereço da pessoa)",
+      "depois": "foto aceita = True; GPS na cópia que vai à CNN = False",
+      "mitigado": true
+    },
+    {
+      "id": "D04",
+      "teste": "Fotos sem qualidade ou arquivo falso",
+      "risco": "R10/R12",
+      "antes": "a CNN pontuaria qualquer arquivo que abrisse",
+      "depois": "escura: foto escura demais; procure um lugar iluminado; borrada: foto borrada; segure firme e foque na lesão; pequena: resolução baixa (120×120); aproxime a câmera; não é imagem: arquivo não é uma imagem válida",
+      "mitigado": true
+    },
+    {
+      "id": "D05",
+      "teste": "Bomba de descompressão: PNG de 7 KB com 64 milhões de pixels",
+      "risco": "R06",
+      "antes": "Pillow padrão abre (8000×8000)",
+      "depois": "imagem grande demais (possível bomba de descompressão)",
+      "mitigado": true
+    },
+    {
+      "id": "D06",
+      "teste": "Resposta gerada com diagnóstico ou falsa tranquilização",
+      "risco": "R11",
+      "antes": "exibida ao cidadão como veio",
+      "depois": "2 de 2 inadequadas bloqueadas; a adequada passou = True",
+      "mitigado": true
+    },
+    {
+      "id": "D07",
+      "teste": "Pontuação da CNN perto do corte (0,36 com corte 0,335)",
+      "risco": "R12",
+      "antes": "decisão automática",
+      "depois": "revisão humana = True (pontuação 0.360 perto do corte 0.335); pontuação 0,91 = False",
+      "mitigado": true
+    },
+    {
+      "id": "D08",
+      "teste": "Arquivo do modelo trocado por um pickle malicioso",
+      "risco": "R13",
+      "antes": "joblib.load executou código do atacante = True",
+      "depois": "modelo legítimo carregou (Regressão Logística ajustada); adulterado bloqueado = True; código executado = False",
+      "mitigado": true
+    }
+  ],
+  "eventos_auditoria": {
+    "leitura_aceita": 19,
+    "totem_desconhecido": 61,
+    "assinatura_invalida": 2,
+    "replay_bloqueado": 1,
+    "horario_fora_da_janela": 1,
+    "unidade_divergente": 1,
+    "limite_ip_excedido": 40,
+    "limite_totem_excedido": 9,
+    "acesso_sem_credencial": 1,
+    "acesso_negado_perfil": 1
+  },
+  "tls": {
+    "versao_tls": "TLSv1.3",
+    "cifra": "TLS_AES_256_GCM_SHA384"
+  }
+}
